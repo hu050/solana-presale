@@ -24,15 +24,15 @@ const deposit_sol = async () => {
         anchor.setProvider(new anchor.AnchorProvider(connection, new Wallet(creatorKeypair), anchor.AnchorProvider.defaultOptions()));
         const program = anchor.workspace.Presale as Program<Presale>;
 
-        const reward_mint = ALIEN_MINT; // LPFI_MINT; //
+        const alien_mint = ALIEN_MINT;
 
         const POOL_AUTHORITY = await PublicKey.findProgramAddress(
             [Buffer.from(POOL_AUTH_PDA_SEED)],
             program.programId
         );
 
-        const POOL_ATA = await getATAPublicKey(reward_mint, POOL_AUTHORITY[0]);
-        const ADMIN_ATA = await getATAPublicKey(reward_mint, user_wallet);
+        const POOL_ATA = await getATAPublicKey(alien_mint, POOL_AUTHORITY[0]);
+        const ADMIN_ATA = await getATAPublicKey(alien_mint, user_wallet);
 
         // Config
         const [config, _config_bump] = await PublicKey.findProgramAddress(
